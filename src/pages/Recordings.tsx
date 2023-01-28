@@ -27,17 +27,17 @@ const Recordings: React.FunctionComponent = () => {
 
             initArr();
         }
-        ,[])
+        ,[addAudio])
 
 
     return (<div >
 
             <MantineProvider withGlobalStyles withNormalizeCSS>
 
-                {!addAudio&&
+                {
 
-                    recordsArr.map((val: AudioFile, index) => <div className="audio">
-                        <ul key={index} onClick={() => {
+                    recordsArr.map((val: AudioFile, index) => <div key={index} className="audio">
+                        <ul  onClick={() => {
                             navigate(`/Recordings/${val.recordId}/${val.fileName}`)
                         }}>
                             <li>name : {val.fileName}</li>
@@ -59,10 +59,8 @@ const Recordings: React.FunctionComponent = () => {
                 <div className="modal">
                     <div onClick={M} className="overlay"></div>
                     <div className="modal-content">
-                       <AddAudioPopup/>
-                        <button className="btn-modal" onClick={M}>
-                            Close
-                        </button>
+                       <AddAudioPopup setPoppedUp={setAddAudio}/>
+
                         </div>
                 </div>)}
 

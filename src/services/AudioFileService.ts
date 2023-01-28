@@ -29,10 +29,10 @@ const prefix = "api/AudioFile"
     }
  }
 
- export const createAsync = async ( filename :string , recordingDuratio : number , data : string )=>{
+ export const createAsync = async ( filename :string , recordingDuration : number , data : string )=>{
     try {
         if (filename && data != undefined)
-            return await axiosInstance.post(`${prefix}`,filename)
+            return await axiosInstance.post(`${prefix}?filename=${filename}&recording=${recordingDuration}&data=${data}`)
     }
     catch (err:any) {
         console.log(err.message)
