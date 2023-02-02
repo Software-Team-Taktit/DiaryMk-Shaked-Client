@@ -13,9 +13,9 @@ export const getTextById = async (textId : string)=>{
     }
 }
 
-export const postNewRecord = async (timeToRecord : number )=>{
+export const postNewRecord = async (filename: string,timeToRecord : number )=>{
     try {
-        return await axiosInstance.post(`${prefix}/UploadAudio?secondToRecord=${timeToRecord}`)
+        return await axiosInstance.post(`${prefix}/UploadAudio?filename=${filename}&secondToRecord=${timeToRecord}`)
     }
     catch (err){
         console.log(err)

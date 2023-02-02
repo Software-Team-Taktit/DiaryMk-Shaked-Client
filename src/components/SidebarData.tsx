@@ -21,6 +21,6 @@ export const SidebarData = [
         title: 'Settings',
         path: '/settings',
         icon: <FaIcons.FaCog />
-    }
+    },
 ]
 

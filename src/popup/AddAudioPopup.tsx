@@ -30,7 +30,7 @@ function AddAudioPopup ({setPoppedUp}:{setPoppedUp:Function}) {
 
     const SubmitAudio = async () => {
        //const res = await createAsync(formData);
-        const res_ = await uploadFiles(File,formData.recordId);
+        const res_ = await uploadFiles(File);
        // setFormData(res && res.data);
         setFileBase64(res_ && res_.data);
     };
@@ -47,10 +47,12 @@ function AddAudioPopup ({setPoppedUp}:{setPoppedUp:Function}) {
 
     useEffect(()=>{
         const startRecording = async ()=> {
-            const res = await postNewRecord(recordTime);
-            await createAsync(filename, recordTime, res && res.data);
-            setPoppedUp((prev: boolean) => !prev);
-
+            if (recordTime) {
+                const res = await postNewRecord(filename,recordTime);
+                await uploadFiles(filename)
+                await createAsync(filename, recordTime, res && res.data);
+                setPoppedUp((prev: boolean) => !prev);
+            }
         }
 
         startRecording();

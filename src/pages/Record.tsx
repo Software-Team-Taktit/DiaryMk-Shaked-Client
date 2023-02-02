@@ -11,7 +11,7 @@ import { MantineProvider } from '@mantine/core';
 function Record(){
 
     const [textRecording , setTextRecording] = useState<Text>();
-    const [audioRecord, setAudioRecord] = useState();
+    const [audioRecord, setAudioRecord] = useState('');
 
     const { id ,filename } = useParams();
 

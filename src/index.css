@@ -100,3 +100,28 @@ body.active-modal {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+.searchBar{
+  position: absolute;
+  top: 10px;
+  right: 40%;
+  padding: 2px 4px;
+  background-color: hotpink;
+  border: none;
+  color: white;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 9px;
+}
+
+.searchIcon{
+  position: absolute;
+  top: 18px;
+  right: 520px;
+  z-index: 2;
+  color: pink;
+
+}

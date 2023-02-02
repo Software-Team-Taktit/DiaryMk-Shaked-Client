@@ -20,9 +20,10 @@ const prefix = "api/AudioFile"
     }
  }
 
- export const uploadFiles = async (file : any , id : string)=>{
+ export const uploadFiles = async (filename : any )=>{
     try {
-        return await axiosInstance.post(`${prefix}/UploadFiles?id=${id}`,file)
+
+        return await axiosInstance.post(`${prefix}/UploadFiles?filename=${filename}`)
     }
     catch (err){
         console.log(err)
@@ -31,7 +32,7 @@ const prefix = "api/AudioFile"
 
  export const createAsync = async ( filename :string , recordingDuration : number , data : string )=>{
     try {
-        if (filename && data != undefined)
+        if (filename && data !== undefined)
             return await axiosInstance.post(`${prefix}?filename=${filename}&recording=${recordingDuration}&data=${data}`)
     }
     catch (err:any) {
