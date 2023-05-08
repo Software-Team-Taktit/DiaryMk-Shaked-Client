@@ -1,27 +1,31 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Sidebar from './components/Sidebar'
-
-import Home from './pages/Home';
-import Search from './pages/Search';
+import Chat from './pages/Chat';
 import Recordings from './pages/Recordings';
 import Settings from './pages/Settings';
 import Record from './pages/Record';
+import NewSession from "./pages/NewSession";
 
-
+const shakedImage = {
+    hadPopped:false
+};
 
 const App: React.FunctionComponent = () => {
+
+    const [hadPopped, setHadPopped] = useState<boolean>(false);
+
   return (
       <>
         <Router>
           <Sidebar />
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/Search' element={<Search />} />
-            <Route path='/Recordings' element={<Recordings />} />
+            <Route path='/Chat' element={<Chat />} />
+            <Route path='/' element={<Recordings hadPopped={hadPopped} setHadPopped={setHadPopped} />} />
+              <Route path='/NewSession' element={<NewSession/>}/>
             <Route path='/Settings' element={<Settings />} />
-              <Route path='/Recordings/:id/:filename' element={<Record />} />
+              <Route path='/:id/:filename' element={<Record />} />
           </Routes>
         </Router>
       </>

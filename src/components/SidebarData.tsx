@@ -1,26 +1,31 @@
 import React from 'react'
 import * as FaIcons from 'react-icons/fa'
+import * as ImIcons from "react-icons/im";
+import * as IaIcons from "react-icons/ai";
+import * as RiIcons from "react-icons/ri";
 
 export const SidebarData = [
     {
-        title: 'Home',
-        path: '/',
-        icon: <FaIcons.FaHome />
+    title: 'Recordings',
+    path: '/',
+    icon: <RiIcons.RiRecordCircleLine />
     },
     {
-        title: 'Search',
-        path: '/search',
-        icon: <FaIcons.FaSearch />
+        title: 'New Session',
+        path: 'NewSession',
+        icon: <IaIcons.AiFillAudio />
     },
     {
-        title: 'Recordings',
-        path: '/recordings',
-        icon: <FaIcons.FaStopCircle />
+        title: 'Chat',
+        path: '/chat',
+        icon: <ImIcons.ImBubbles4 />
     },
+
     {
         title: 'Settings',
         path: '/settings',
         icon: <FaIcons.FaCog />
     },
+
 ]
 

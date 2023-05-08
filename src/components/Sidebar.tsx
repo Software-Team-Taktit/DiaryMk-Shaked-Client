@@ -1,44 +1,46 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-
+import {TeamLogoStyled} from "../Popup/TeamLogoStyled";
 import * as FaIcons from 'react-icons/fa'
-
 import { SidebarData } from './SidebarData';
+import ContactUsPopup from "../Popup/ ContactUsPopup";
 
-const Navbar = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  height: 3.5rem;
-  background-color: #931866;
-`
 
 const MenuIconOpen = styled(Link)`
     display: flex;
     justify-content: start;
     font-size: 1.5rem;
-    margin-left: 2rem;
-    color: #ffffff;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    color: black;
 `
 
 const MenuIconClose = styled(Link)`
     display: flex;
     justify-content: end;
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin-top: 0.75rem;
     margin-right: 1rem;
-    color: #ffffff;
+    color: black;
+  &:hover {
+    background-color: #c9c8c8 ;
+    margin-left: 7.5rem;
+    border-radius: 100%;
+  } 
 `
 
 const SidebarMenu = styled.div<{close: boolean}>`
-    width: 250px;
+  z-index: 10;
+    width: 150px;
     height: 100vh;
-    background-color: #931866;
+    background-color: #ECF2FF;
     position: fixed;
     top: 0;
     left: ${({ close}) => close ? '0' : '-100%'};
     transition: .6s;
+
+
 `
 
 const MenuItems = styled.li`
@@ -47,57 +49,60 @@ const MenuItems = styled.li`
     align-items: center;
     justify-content: start;
     width: 100%;
-    height: 90px;
-    padding: 1rem 0 1.25rem;
+    height: 30px;
+    padding: 1.5rem 0 0.8rem;
 `
-
 const MenuItemLinks = styled(Link)`
   display: flex;
   align-items: center;
   padding: 0 2rem;
-  font-size: 20px;
+  font-size: 12px;
   text-decoration: none;
-  color: #ffffff;
+  color: black;
 
   &:hover {
-    background-color: #ffffff;
+    background-color: #c9c8c8;
     color: #131212;
     width: 100%;
-    height: 45px;
+    height: 20px;
     text-align: center;
-    border-radius: 5px;
-    margin: 0 2rem;
+    border-radius: 10px;
+    display: flex;
   }
 `
 
 const Sidebar: React.FunctionComponent = () => {
     const [close, setClose] = useState(false)
+    const [poppedUp, setPoppedUp] = useState(false);
     const showSidebar = () => setClose(!close)
     return (
-        <>
-            <Navbar>
+        <div>
+
+
                 <MenuIconOpen to="#" onClick={showSidebar}>
                     <FaIcons.FaBars />
                 </MenuIconOpen>
-            </Navbar>
-
             <SidebarMenu close={close}>
-                <MenuIconClose to="#" onClick={showSidebar}>
-                    <FaIcons.FaTimes />
+                <MenuIconClose to="#" onClick={showSidebar} >
+                    <FaIcons.FaTimes/>
                 </MenuIconClose>
-
+                <h3 style={{height:"-10px",width:"-8px",marginLeft:"15px",marginTop:"-25px",display:"flex",font:"caption"}}>SHAKED  </h3>
                 {SidebarData.map((item, index) => {
                     return (
                         <MenuItems key={index}>
                             <MenuItemLinks to={item.path}>
                                 {item.icon}
-                                <span style={{marginLeft: '16px'}}>{item.title}</span>
+                                <span style={{marginLeft: '5px'}}>{item.title}</span>
                             </MenuItemLinks>
+
                         </MenuItems>
+
+
                     )
                 })}
+                <ContactUsPopup/>
             </SidebarMenu>
-        </>
+        </div>
     )
 }
 
