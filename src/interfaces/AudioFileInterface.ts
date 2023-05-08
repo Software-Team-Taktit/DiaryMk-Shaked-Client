@@ -4,5 +4,6 @@ export interface AudioFile {
     fileName : string;
     mkId: string ;
     recordingDuration : number ;
-    dateOfRecord : any ;
+    dateOfRecord : string ;
+    timeOfRecord : string;
 }

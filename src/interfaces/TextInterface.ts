@@ -1,7 +1,7 @@
 
-export interface Text {
+export interface TextFile {
     textId : string;
     data : string;
-    mkId ? : string;
-    dateOfRecord : any;
+    mkId : string;
+    dateOfRecord : string;
 }

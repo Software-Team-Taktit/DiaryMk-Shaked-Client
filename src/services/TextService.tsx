@@ -1,4 +1,5 @@
 import {axiosInstance} from "./AxiosInstance"
+import {TextFile} from "../interfaces/TextInterface";
 
 
 const prefix = "api/Text"
@@ -22,3 +23,21 @@ export const postNewRecord = async (filename: string,timeToRecord : number )=>{
         return null;
     }
 }
+
+export const getText = async ()=>{
+    try {
+        return await axiosInstance.get(`${prefix}`);
+    }
+    catch (err){
+        console.log(err)
+    }
+}
+
+export const putNewText = async (textFile : TextFile, text : string )=>{
+    try {
+            return await axiosInstance.put(`${prefix}/${textFile.textId}`, {...textFile,data:text})
+    }
+    catch (err:any){
+        console.log(err.message)
+    }
+ }
