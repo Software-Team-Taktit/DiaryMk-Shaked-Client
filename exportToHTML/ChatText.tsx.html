@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>ChatText.tsx</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #e8bf6a;}
+.s4 { color: #bababa;}
+.s5 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ChatText.tsx</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">React</span><span class="s0">, </span><span class="s1">{useEffect</span><span class="s0">, </span><span class="s1">useRef} from </span><span class="s2">'react'</span>
+<span class="s0">import </span><span class="s1">{TextFile} from </span><span class="s2">&quot;../interfaces/TextInterface&quot;</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">{AudioFile} from </span><span class="s2">&quot;../interfaces/AudioFileInterface&quot;</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">{ useNavigate } from </span><span class="s2">&quot;react-router-dom&quot;</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">{match} from </span><span class="s2">&quot;assert&quot;</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">{postNewRecord} from </span><span class="s2">&quot;../services/TextService&quot;</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">{createAsync</span><span class="s0">, </span><span class="s1">uploadFiles} from </span><span class="s2">&quot;../services/AudioFileService&quot;</span><span class="s0">;</span>
+
+
+<span class="s0">function </span><span class="s1">ChatText ({content </span><span class="s0">,</span><span class="s1">textArr </span><span class="s0">, </span><span class="s1">audioArr }:{content:Array&lt;string&gt; </span><span class="s0">,</span><span class="s1">textArr:Array&lt;TextFile&gt; </span><span class="s0">, </span><span class="s1">audioArr:Array&lt;AudioFile&gt; } )  {</span>
+    <span class="s0">const </span><span class="s1">navigate = useNavigate()</span><span class="s0">;</span>
+    <span class="s0">const </span><span class="s1">scrollableDiv = useRef&lt;any&gt;(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s1">useEffect(()=&gt;{</span>
+        <span class="s0">if </span><span class="s1">(scrollableDiv.current){</span>
+            <span class="s1">scrollableDiv.current.scrollTop = scrollableDiv.current.scrollHeight</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">})</span>
+
+    <span class="s0">const </span><span class="s1">newRecord = async (filename:string</span><span class="s0">, </span><span class="s1">duration:number)=&gt;{</span>
+
+        <span class="s0">const </span><span class="s1">res = </span><span class="s0">await </span><span class="s1">postNewRecord(filename</span><span class="s0">,</span><span class="s1">duration)</span><span class="s0">;</span>
+        <span class="s1">console.log(res&amp;&amp; res.data)</span>
+        <span class="s0">if </span><span class="s1">(res) {</span>
+            <span class="s0">await </span><span class="s1">uploadFiles(filename)</span>
+            <span class="s0">await </span><span class="s1">createAsync(filename</span><span class="s0">, </span><span class="s1">duration</span><span class="s0">, </span><span class="s1">res &amp;&amp; res.data)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">return </span><span class="s1">(</span>
+        <span class="s3">&lt;div </span><span class="s4">ref</span><span class="s2">=</span><span class="s1">{scrollableDiv} </span><span class="s4">style</span><span class="s2">=</span><span class="s1">{{position:</span><span class="s2">&quot;relative&quot;</span><span class="s0">,</span><span class="s1">width: window.innerWidth/</span><span class="s5">2</span><span class="s0">,</span><span class="s1">height:window.innerHeight*</span><span class="s5">0.8</span><span class="s0">,</span><span class="s1">borderRadius:</span><span class="s2">&quot;5px&quot;</span><span class="s0">,</span><span class="s1">backgroundColor:</span><span class="s2">&quot;#ECF2FF&quot; </span><span class="s0">, </span><span class="s1">overflowX:</span><span class="s2">&quot;hidden&quot;</span><span class="s0">, </span><span class="s1">overflowY:</span><span class="s2">&quot;auto&quot;</span><span class="s0">, </span><span class="s1">padding:</span><span class="s5">10</span><span class="s1">}}</span><span class="s3">&gt;</span>
+            <span class="s1">{content.map((prompt</span><span class="s0">,</span><span class="s1">index</span><span class="s0">,</span><span class="s1">array) =&gt;{</span>
+                <span class="s0">if</span><span class="s1">(prompt.includes(</span><span class="s2">&quot;user:&quot;</span><span class="s1">))</span>
+                    <span class="s0">return </span><span class="s3">&lt;h4 </span><span class="s4">style</span><span class="s2">=</span><span class="s1">{{backgroundColor:</span><span class="s2">&quot;#BA94D1&quot;</span><span class="s0">, </span><span class="s1">marginBottom:</span><span class="s5">3</span><span class="s0">, </span><span class="s1">borderRadius: </span><span class="s5">5 </span><span class="s0">, </span><span class="s1">width:</span><span class="s2">'50%'</span><span class="s0">, </span><span class="s1">padding:</span><span class="s5">8</span><span class="s0">, </span><span class="s1">marginLeft: </span><span class="s2">'50%'</span><span class="s0">, </span><span class="s1">wordWrap:</span><span class="s2">&quot;break-word&quot;</span><span class="s1">}} </span><span class="s4">dir</span><span class="s2">=</span><span class="s1">{</span><span class="s2">'rtl'</span><span class="s1">}</span><span class="s3">&gt;</span><span class="s1">{prompt}</span><span class="s3">&lt;/h4&gt;</span>
+
+                 <span class="s0">if</span><span class="s1">(prompt === </span><span class="s2">&quot;audios&quot;</span><span class="s1">)</span>
+                    <span class="s0">return </span><span class="s1">audioArr.map((v</span><span class="s0">,</span><span class="s1">index)=&gt;</span><span class="s3">&lt;div </span><span class="s4">key</span><span class="s2">=</span><span class="s1">{</span><span class="s2">`</span><span class="s1">${v.fileName}${index}</span><span class="s2">`</span><span class="s1">} </span><span class="s4">onClick</span><span class="s2">=</span><span class="s1">{()=&gt;{navigate(</span><span class="s2">`/</span><span class="s1">${v.recordId}</span><span class="s2">/</span><span class="s1">${v.fileName}</span><span class="s2">`</span><span class="s1">)}} </span><span class="s4">style</span><span class="s2">=</span><span class="s1">{{backgroundColor:</span><span class="s2">&quot;#E5D1FA&quot;</span><span class="s0">, </span><span class="s1">marginBottom:</span><span class="s5">3</span><span class="s0">, </span><span class="s1">borderRadius: </span><span class="s5">5 </span><span class="s0">,</span><span class="s1">width:</span><span class="s2">&quot;60%&quot;</span><span class="s0">,</span><span class="s1">wordWrap:</span><span class="s2">&quot;break-word&quot;</span><span class="s0">, </span><span class="s1">padding:</span><span class="s5">10</span><span class="s1">}}</span><span class="s3">&gt;</span>
+                        <span class="s3">&lt;h5&gt;</span><span class="s1">filename: {v.fileName}</span><span class="s3">&lt;/h5&gt;</span>
+                        <span class="s3">&lt;h5&gt;</span><span class="s1">dateOfRecord: {v.dateOfRecord+ </span><span class="s2">&quot; &quot; </span><span class="s1">+v.timeOfRecord}</span><span class="s3">&lt;/h5&gt;</span>
+                    <span class="s3">&lt;/div&gt;</span><span class="s1">)</span>
+
+                <span class="s0">if</span><span class="s1">(prompt === </span><span class="s2">&quot;putAudio&quot;</span><span class="s1">)</span>
+                     <span class="s0">return </span><span class="s3">&lt;h4 </span><span class="s4">style</span><span class="s2">=</span><span class="s1">{{backgroundColor:</span><span class="s2">&quot;#E5D1FA&quot;</span><span class="s0">, </span><span class="s1">marginBottom:</span><span class="s5">3</span><span class="s0">, </span><span class="s1">borderRadius: </span><span class="s5">5 </span><span class="s0">,</span><span class="s1">width:</span><span class="s2">&quot;60%&quot;</span><span class="s0">,</span><span class="s1">wordWrap:</span><span class="s2">&quot;break-word&quot;</span><span class="s0">, </span><span class="s1">padding:</span><span class="s5">10</span><span class="s1">}}</span><span class="s3">&gt;</span><span class="s1">מה שם ההקלטה?</span><span class="s3">&lt;/h4&gt;</span>
+
+                 <span class="s0">if</span><span class="s1">(prompt === </span><span class="s2">&quot;duration&quot;</span><span class="s1">)</span>
+                     <span class="s0">return </span><span class="s3">&lt;h4 </span><span class="s4">style</span><span class="s2">=</span><span class="s1">{{backgroundColor:</span><span class="s2">&quot;#E5D1FA&quot;</span><span class="s0">, </span><span class="s1">marginBottom:</span><span class="s5">3</span><span class="s0">, </span><span class="s1">borderRadius: </span><span class="s5">5 </span><span class="s0">,</span><span class="s1">width:</span><span class="s2">&quot;60%&quot;</span><span class="s0">,</span><span class="s1">wordWrap:</span><span class="s2">&quot;break-word&quot;</span><span class="s0">, </span><span class="s1">padding:</span><span class="s5">10</span><span class="s1">}}</span><span class="s3">&gt;</span><span class="s1">מה משך ההקלטה?</span><span class="s3">&lt;/h4&gt;</span>
+
+                <span class="s0">if</span><span class="s1">(prompt === </span><span class="s2">&quot;record&quot;</span><span class="s1">){</span>
+                    <span class="s0">let </span><span class="s1">lastFilename = content[content.length - </span><span class="s5">4</span><span class="s1">].slice(</span><span class="s5">5</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">let </span><span class="s1">lastDuration =Number(content[content.length - </span><span class="s5">2</span><span class="s1">].slice(</span><span class="s5">5</span><span class="s1">))</span><span class="s0">;</span>
+
+                    <span class="s0">const </span><span class="s1">curFilename = content[index-</span><span class="s5">3</span><span class="s1">].slice(</span><span class="s5">5</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">if</span><span class="s1">(audioArr.length&gt;</span><span class="s5">0 </span><span class="s1">&amp;&amp; index ===  array.length-</span><span class="s5">1  </span><span class="s1">&amp;&amp; !!!audioArr.find(audio=&gt;audio.fileName===lastFilename))</span>
+                        <span class="s1">newRecord(lastFilename</span><span class="s0">,</span><span class="s1">lastDuration)</span><span class="s0">;</span>
+                    <span class="s0">return </span><span class="s3">&lt;h4 </span><span class="s4">onClick</span><span class="s2">=</span><span class="s1">{()=&gt;navigate(</span><span class="s2">`/</span><span class="s1">${audioArr.find(audio=&gt;audio.fileName=== curFilename)?.recordId}</span><span class="s2">/</span><span class="s1">${curFilename}</span><span class="s2">`</span><span class="s1">)}  </span><span class="s4">style</span><span class="s2">=</span><span class="s1">{{backgroundColor:</span><span class="s2">&quot;#E5D1FA&quot;</span><span class="s0">, </span><span class="s1">marginBottom:</span><span class="s5">3</span><span class="s0">, </span><span class="s1">borderRadius: </span><span class="s5">5 </span><span class="s0">,</span><span class="s1">width:</span><span class="s2">&quot;60%&quot;</span><span class="s0">,</span><span class="s1">wordWrap:</span><span class="s2">&quot;break-word&quot;</span><span class="s0">, </span><span class="s1">padding:</span><span class="s5">10</span><span class="s1">}}</span><span class="s3">&gt;</span><span class="s1">{</span><span class="s2">` למעבר להקלטה: </span><span class="s1">${curFilename} </span><span class="s2">לחץ כאן `</span><span class="s1">}</span><span class="s3">&lt;/h4&gt;</span>
+                <span class="s1">}</span>
+
+
+                <span class="s0">if</span><span class="s1">(prompt.includes(</span><span class="s2">&quot;textFile: &quot;</span><span class="s1">)){</span>
+                    <span class="s0">let </span><span class="s1">numberInString:any = (prompt.match(</span><span class="s5">/(\d+)/</span><span class="s1">))</span><span class="s0">;</span>
+                    <span class="s0">let </span><span class="s1">index =  Number(numberInString[</span><span class="s5">0</span><span class="s1">])</span><span class="s0">;</span>
+                    <span class="s0">let </span><span class="s1">curTextFile =  textArr[index]</span><span class="s0">;</span>
+
+                    <span class="s0">return </span><span class="s1">curTextFile &amp;&amp;</span><span class="s3">&lt;div </span><span class="s4">style</span><span class="s2">=</span><span class="s1">{{backgroundColor:</span><span class="s2">&quot;#E5D1FA&quot;</span><span class="s0">, </span><span class="s1">marginBottom:</span><span class="s5">3</span><span class="s0">, </span><span class="s1">borderRadius: </span><span class="s5">5 </span><span class="s0">,</span><span class="s1">width:</span><span class="s2">&quot;60%&quot;</span><span class="s0">,</span><span class="s1">wordWrap:</span><span class="s2">&quot;break-word&quot;</span><span class="s0">, </span><span class="s1">padding:</span><span class="s5">10</span><span class="s1">}}</span><span class="s3">&gt;</span>
+                        <span class="s3">&lt;h5&gt;</span><span class="s1">text: {curTextFile.data}</span><span class="s3">&lt;/h5&gt;</span>
+                        <span class="s3">&lt;h5&gt;</span><span class="s1">dateOfRecord: {curTextFile.dateOfRecord}</span><span class="s3">&lt;/h5&gt;</span>
+                    <span class="s3">&lt;/div&gt;</span>
+                <span class="s1">}</span>
+
+                <span class="s0">return </span><span class="s3">&lt;h4 </span><span class="s4">style</span><span class="s2">=</span><span class="s1">{{backgroundColor:</span><span class="s2">&quot;#E5D1FA&quot;</span><span class="s0">, </span><span class="s1">marginBottom:</span><span class="s5">3</span><span class="s0">, </span><span class="s1">borderRadius: </span><span class="s5">5 </span><span class="s0">,</span><span class="s1">width:</span><span class="s2">&quot;60%&quot;</span><span class="s0">,</span><span class="s1">wordWrap:</span><span class="s2">&quot;break-word&quot;</span><span class="s0">, </span><span class="s1">padding:</span><span class="s5">10</span><span class="s1">}}</span><span class="s3">&gt;</span><span class="s1">{prompt}</span><span class="s3">&lt;/h4&gt;</span>
+
+            <span class="s1">})}</span>
+        <span class="s3">&lt;/div&gt;</span>
+    <span class="s1">)</span>
+<span class="s1">}</span>
+<span class="s0">export default </span><span class="s1">ChatText</span></pre>
+</body>
+</html>

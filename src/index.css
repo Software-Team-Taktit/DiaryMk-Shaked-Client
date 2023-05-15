@@ -5,7 +5,6 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
@@ -13,115 +12,146 @@ code {
     monospace;
 }
 
-.audio {
-  display: block;
-  background-image: url("https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148907303.jpg?auto=format&h=200");
-  margin-bottom: 10px;
-  border-radius: 10px;
-  font-family: Georgia, serif;
-
-}
-
-body.active-modal {
-  overflow-y: hidden;
-}
-
-.modal, .overlay {
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: fixed;
-}
-
-.overlay {
-  background: rgba(49,49,49,0.8);
-}
-.modal-content {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  line-height: 1.4;
-  background-image: url("https://4kwallpapers.com/images/wallpapers/pink-glitter-shimmering-pink-background-shiny-sparkles-4480x2520-5936.jpg");
-  padding: 14px 28px;
-  border-radius: 3px;
-  max-width: 600px;
-  min-width: 300px;
-  font-family: Georgia, serif;
-}
-
-.btn-modal {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 2px 4px;
-  background-color: hotpink;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 50%;
-}
-.text{
-  display: flex;
-  font-family: Georgia, serif;
-  background-image: url("https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148907303.jpg?auto=format&h=200");
-  margin-bottom: 10px;
-  border-radius: 10px;
-
-}
-
 .button {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
   text-decoration: none;
-  outline: none;
-  color: #fff;
-  background-color: pink;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 9px #999;
+  border-radius: 45%;
+  font-size: 1.5rem;
+  margin-left: 3rem;
+  margin-top: -1.5rem;
+  position: absolute;
+  background: #ECF2FF;
+  border: transparent;
 }
 
-.button:hover {background-color: hotpink}
+.button:hover {background-color: lightgray; border-radius: 1000px;}
 
 .button:active {
-  background-color: pink;
+  background-color: #ECF2FF;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+  border-radius: 1000px;
+
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  border-radius: 45%;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+  margin-left: 7rem;
+  margin-top: -2.8rem;
+  position: absolute;
+  background: #ECF2FF;
+  border: transparent;
+}
+.logo{
+  height: 540px;
+  width: 1250px;
+}
+
+.backBtn:hover {background-color: lightgray; border-radius: 1000px;}
+
+.backBtn:active {
+  background-color: #ECF2FF;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+  border-radius: 1000px;
 }
 .searchBar{
-  position: absolute;
-  top: 10px;
-  right: 40%;
-  padding: 2px 4px;
-  background-color: hotpink;
+  position: relative;
+  padding: 2px 40px;
+  background-color: #ECF2FF;
   border: none;
-  color: white;
+  color: black;
   text-align: left;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 6px 4px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.chatBack{
+  position:absolute;
+}
+
+.chatBar{
+  position: relative;
+  padding: 2px 4px;
+  background-color: #ECF2FF;
+  border: none;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
   cursor: pointer;
   border-radius: 9px;
+  width: 350px;
+}
+
+.sendBtn{
+  position: relative;
+  background: transparent;
+  border: transparent;
+
+}
+.sendBtn:hover {background-color: #BA94D1;border-radius: 9px;}
+
+.sendBtn:active {
+  background-color: #7F669D;
+  transform: translateY(4px);
+  border-radius: 100px;
+
+
 }
 
 .searchIcon{
-  position: absolute;
-  top: 18px;
-  right: 520px;
+  position: relative;
   z-index: 2;
-  color: pink;
+  color: black;
 
+}
+.text{
+  position: absolute;
+  width: 70rem;
+  height: 20rem;
+  margin-left: 5rem;
+  margin-top: 2rem;
+  direction: rtl;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: caption, system-ui;
+  line-break: auto;
+}
+
+.header{
+  position: absolute;
+  right: 45vw;
+  text-align: center;
+  top: 1vh;
+  font-family:caption, system-ui;
+  color: #5C5C5C;
+
+}
+
+.data{
+  position: absolute;
+  right: 1vw;
+  text-align: center;
+  top: 1vh;
+  font-family:caption, system-ui;
+  color: #5C5C5C;
+  font-size: 12px;
+}
+
+.mediaPlayer{
+  position: absolute;
+  width: 100vw;
+  top: 85vh;
+  background: linear-gradient(90.07deg, #7F669D 0%, #BA94D1 49.48%, #8FADED 100%);
 }
